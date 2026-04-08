@@ -1,0 +1,2550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glosaryo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+25&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/jersey-10" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* All existing CSS styles remain the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #E0BE99;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ========== RESPONSIVE NAVIGATION ========== */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s ease;
+            background: rgba(0, 0, 0, 0);
+        }
+
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-left {
+            display: flex;
+            gap: 0;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-family: 'Jersey 25', cursive;
+            font-size: 22px;
+            transition: color 0.3s ease;
+            position: relative;
+            font-weight: 600;
+        }
+
+        /* Active navigation styling */
+        nav a.active {
+            color: #ffffff;
+            border-bottom: 4px solid #D32F2F;
+            padding-bottom: 5px;
+        }
+
+        nav a:not(.active):hover {
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        /* Hamburger menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 4px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            flex-direction: column;
+            padding: 80px 30px 30px;
+            z-index: 999;
+            transition: right 0.4s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+            display: flex;
+        }
+
+        .mobile-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Jersey 25', cursive;
+            font-size: 24px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu a.active {
+            color: #FFD700;
+            border-bottom: 2px solid #D32F2F;
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a:hover {
+            color: #FFD700;
+            padding-left: 10px;
+        }
+
+        /* Overlay for mobile menu */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 998;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* HERO SECTION - RESPONSIVE */
+        .hero {
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 5%;
+            position: relative;
+            background: url('./images/bg4.png') center/cover no-repeat;
+            overflow: hidden;
+        }
+
+        /* Enhanced background gradient with decorative elements */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+        }
+
+        .hero>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Jersey 25', cursive;
+            font-size: clamp(100px, 30vw, 200px);
+            margin-bottom: 20px;
+            margin-top: 80px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            line-height: 1;
+            font-weight: 900;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1::before {
+            content: 'GLOSARYO';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #FFD700, #FFFFFF, #FFD700);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 3s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        .hero h1::after {
+            content: 'GLOSARYO';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: transparent;
+            text-shadow:
+                4px 4px 0px #D32F2F;
+            z-index: 1;
+        }
+
+        @keyframes textShine {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .hero p {
+            font-family: 'Jersey 10', cursive;
+            max-width: 690px;
+            font-size: 34px;
+            line-height: 1.8;
+            margin-bottom: 60px;
+            color: #fff;
+            font-weight: 400;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 0.5px;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .scroll-down svg {
+            width: 40px;
+            height: 40px;
+            stroke: #ffffff;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-15px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-8px);
+            }
+        }
+
+        /* Carousel Section - RESPONSIVE */
+        .carousel-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 20px;
+            background: url('./images/bg5.png') center/cover no-repeat;
+            text-align: center;
+        }
+
+        .carousel-section h2 {
+            font-family: 'Jersey 25', cursive;
+            font-size: clamp(40px, 10vw, 80px);
+            color: #FFD700;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow:
+                3px 3px 0px #D32F2F,
+                6px 6px 0px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+
+        .carousel-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background-color: #D32F2F;
+            border-radius: 2px;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            min-height: 400px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.5s ease;
+            margin-top: 20px;
+            padding: 10px;
+        }
+
+        .carousel-card {
+            min-width: 280px;
+            width: 280px;
+            height: 380px;
+            margin: 0 10px;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.3s ease;
+            background: linear-gradient(180deg, #FFD54F 0%, #FFC107 100%);
+            box-shadow:
+                0 0 0 2px rgba(0, 0, 0, 0.1),
+                0 6px 0 0 #D32F2F,
+                0 8px 0 0 #B71C1C,
+                0 10px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .carousel-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 30px;
+            background: inherit;
+            clip-path: polygon(0% 20px, 6px 20px, 6px 14px, 14px 14px, 14px 6px, 20px 6px, 20px 0%,
+                    calc(100% - 20px) 0%, calc(100% - 20px) 6px, calc(100% - 14px) 6px, calc(100% - 14px) 14px, calc(100% - 6px) 14px, calc(100% - 6px) 20px, 100% 20px,
+                    100% calc(100% - 20px), calc(100% - 6px) calc(100% - 20px), calc(100% - 6px) calc(100% - 14px), calc(100% - 14px) calc(100% - 14px), calc(100% - 14px) calc(100% - 6px), calc(100% - 20px) calc(100% - 6px), calc(100% - 20px) 100%,
+                    20px 100%, 20px calc(100% - 6px), 14px calc(100% - 6px), 14px calc(100% - 14px), 6px calc(100% - 14px), 6px calc(100% - 20px), 0% calc(100% - 20px));
+        }
+
+        .carousel-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .card-blue-bg,
+        .card-red-bg,
+        .card-yellow-bg,
+        .card-green-bg {
+            position: absolute;
+            inset: 15px;
+            border-radius: 25px;
+            clip-path: polygon(0% 15px, 5px 15px, 5px 10px, 10px 10px, 10px 5px, 15px 5px, 15px 0%,
+                    calc(100% - 15px) 0%, calc(100% - 15px) 5px, calc(100% - 10px) 5px, calc(100% - 10px) 10px, calc(100% - 5px) 10px, calc(100% - 5px) 15px, 100% 15px,
+                    100% calc(100% - 15px), calc(100% - 5px) calc(100% - 15px), calc(100% - 5px) calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), calc(100% - 10px) calc(100% - 5px), calc(100% - 15px) calc(100% - 5px), calc(100% - 15px) 100%,
+                    15px 100%, 15px calc(100% - 5px), 10px calc(100% - 5px), 10px calc(100% - 10px), 5px calc(100% - 10px), 5px calc(100% - 15px), 0% calc(100% - 15px));
+        }
+
+        .card-blue-bg {
+            background: linear-gradient(180deg, #42A5F5 0%, #1E88E5 50%, #1565C0 100%);
+        }
+
+        .card-red-bg {
+            background: linear-gradient(180deg, #EF5350 0%, #E53935 50%, #C62828 100%);
+        }
+
+        .card-yellow-bg {
+            background: linear-gradient(180deg, #FFEE58 0%, #FDD835 50%, #F9A825 100%);
+        }
+
+        .card-green-bg {
+            background: linear-gradient(180deg, #04C6B1 0%, #13b1a1 50%, #03B9A6 100%);
+        }
+
+        .card-content {
+            background: #FFFFFF;
+            width: calc(100% - 20px);
+            height: 160px;
+            margin: 10px 0 15px 0;
+            border-radius: 15px;
+            box-shadow: 0 0 0 6px #FFC107, inset 0 2px 5px rgba(0, 0, 0, 0.05);
+            clip-path: polygon(0% 12px, 4px 12px, 4px 8px, 8px 8px, 8px 4px, 12px 4px, 12px 0%,
+                    calc(100% - 12px) 0%, calc(100% - 12px) 4px, calc(100% - 8px) 4px, calc(100% - 8px) 8px, calc(100% - 4px) 8px, calc(100% - 4px) 12px, 100% 12px,
+                    100% calc(100% - 12px), calc(100% - 4px) calc(100% - 12px), calc(100% - 4px) calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) calc(100% - 4px), calc(100% - 12px) calc(100% - 4px), calc(100% - 12px) 100%,
+                    12px 100%, 12px calc(100% - 4px), 8px calc(100% - 4px), 8px calc(100% - 8px), 4px calc(100% - 8px), 4px calc(100% - 12px), 0% calc(100% - 12px));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .card-title {
+            font-family: 'Jersey 25', cursive;
+            font-size: 28px;
+            color: #FFFFFF;
+            margin: 0 0 8px 0;
+            text-transform: capitalize;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            z-index: 2;
+        }
+
+        .card-description {
+            font-family: 'Jersey 10';
+            font-size: 16px;
+            color: #FFFFFF;
+            line-height: 1.4;
+            text-align: center;
+            font-weight: 400;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            padding: 0 10px;
+            z-index: 2;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .carousel-btn {
+            background-color: #FFD700;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .carousel-btn:hover {
+            background-color: #FFA500;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .carousel-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Kagamitan Section - RESPONSIVE */
+        .kagamitan-section,
+        .materyales-section,
+        .proseso-section,
+        .gampanin-section,
+        .detail-section {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 120px 5% 50px;
+            background: url('./images/bg5.png') center/cover no-repeat;
+            background-size: cover !important;
+        }
+
+        .kagamitan-header,
+        .materyales-header,
+        .proseso-header,
+        .gampanin-header,
+        .detail-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 40px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .kagamitan-title,
+        .materyales-title,
+        .proseso-title,
+        .gampanin-title,
+        .detail-title {
+            font-family: 'Jersey 25', cursive;
+            font-size: clamp(40px, 8vw, 80px);
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow:
+                3px 3px 0px #D32F2F,
+                6px 6px 0px rgba(0, 0, 0, 0.3);
+            margin: 0;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .kagamitan-grid,
+        .materyales-grid,
+        .proseso-grid,
+        .gampanin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .kagamitan-button {
+            background: linear-gradient(180deg, #32BCE6 0%, #90C8FF 50%, #32BCE6 100%);
+            border: 6px solid #FFC107;
+            padding: 20px 12px;
+            font-family: 'Jersey 25', cursive;
+            font-size: 20px;
+            color: #FFFFFF;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+            box-shadow:
+                0 0 0 2px rgba(0, 0, 0, 0.1),
+                0 6px 0 0 #D32F2F,
+                0 8px 0 0 #B71C1C,
+                0 10px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            border-radius: 0;
+            clip-path: polygon(0% 10px,
+                    5px 10px, 5px 5px,
+                    10px 5px, 10px 0%,
+                    calc(100% - 10px) 0%,
+                    calc(100% - 10px) 5px,
+                    calc(100% - 5px) 5px,
+                    calc(100% - 5px) 10px,
+                    100% 10px,
+                    100% calc(100% - 10px),
+                    calc(100% - 5px) calc(100% - 10px),
+                    calc(100% - 5px) calc(100% - 5px),
+                    calc(100% - 10px) calc(100% - 5px),
+                    calc(100% - 10px) 100%,
+                    10px 100%,
+                    10px calc(100% - 5px),
+                    5px calc(100% - 5px),
+                    5px calc(100% - 10px),
+                    0% calc(100% - 10px));
+        }
+
+        .kagamitan-button::before {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            background: linear-gradient(180deg, #1E88E5 0%, #1565C0 50%, #0D47A1 100%);
+            clip-path: polygon(0% 6px,
+                    3px 6px, 3px 3px,
+                    6px 3px, 6px 0%,
+                    calc(100% - 6px) 0%,
+                    calc(100% - 6px) 3px,
+                    calc(100% - 3px) 3px,
+                    calc(100% - 3px) 6px,
+                    100% 6px,
+                    100% calc(100% - 6px),
+                    calc(100% - 3px) calc(100% - 6px),
+                    calc(100% - 3px) calc(100% - 3px),
+                    calc(100% - 6px) calc(100% - 3px),
+                    calc(100% - 6px) 100%,
+                    6px 100%,
+                    6px calc(100% - 3px),
+                    3px calc(100% - 3px),
+                    3px calc(100% - 6px),
+                    0% calc(100% - 6px));
+            z-index: 1;
+        }
+
+        .kagamitan-button:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                0 0 0 2px rgba(0, 0, 0, 0.1),
+                0 10px 0 0 #D32F2F,
+                0 12px 0 0 #B71C1C,
+                0 15px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .kagamitan-button:active {
+            transform: translateY(-2px);
+            box-shadow:
+                0 0 0 2px rgba(0, 0, 0, 0.1),
+                0 4px 0 0 #D32F2F,
+                0 6px 0 0 #B71C1C,
+                0 8px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Content wrapper to position text above the pseudo-element */
+        .kagamitan-button>span {
+            position: relative;
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: clamp(16px, 3vw, 20px);
+        }
+
+        .back-button {
+            background-color: #FFD700;
+            border: 3px solid #000;
+            padding: 12px 25px;
+            border-radius: 0;
+            font-family: 'Jersey 25', cursive;
+            font-size: 18px;
+            color: #000;
+            cursor: pointer;
+            transition: all 0.2s steps(2);
+            white-space: nowrap;
+            font-weight: 600;
+            box-shadow:
+                3px 3px 0 #B71C1C,
+                6px 6px 0 #7F0000,
+                0 0 0 3px #000;
+        }
+
+        .back-button:hover {
+            background-color: #FFA500;
+            transform: translate(-2px, -2px);
+            box-shadow:
+                5px 5px 0 #B71C1C,
+                8px 8px 0 #7F0000,
+                0 0 0 3px #000;
+        }
+
+        /* Detail Card - RESPONSIVE */
+        .detail-card {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            min-height: 700px;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background: linear-gradient(180deg, #FFD54F 0%, #FFC107 100%);
+            box-shadow:
+                0 0 0 2px rgba(0, 0, 0, 0.1),
+                0 6px 0 0 #D32F2F,
+                0 8px 0 0 #B71C1C,
+                0 10px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .detail-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 30px;
+            background: inherit;
+            clip-path: polygon(0% 20px, 6px 20px, 6px 14px, 14px 14px, 14px 6px, 20px 6px, 20px 0%,
+                    calc(100% - 20px) 0%, calc(100% - 20px) 6px, calc(100% - 14px) 6px, calc(100% - 14px) 14px, calc(100% - 6px) 14px, calc(100% - 6px) 20px, 100% 20px,
+                    100% calc(100% - 20px), calc(100% - 6px) calc(100% - 20px), calc(100% - 6px) calc(100% - 14px), calc(100% - 14px) calc(100% - 14px), calc(100% - 14px) calc(100% - 6px), calc(100% - 20px) calc(100% - 6px), calc(100% - 20px) 100%,
+                    20px 100%, 20px calc(100% - 6px), 14px calc(100% - 6px), 14px calc(100% - 14px), 6px calc(100% - 14px), 6px calc(100% - 20px), 0% calc(100% - 20px));
+        }
+
+        .detail-card-inner {
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .detail-card-bg {
+            position: absolute;
+            inset: 15px;
+            border-radius: 25px;
+            clip-path: polygon(0% 15px, 5px 15px, 5px 10px, 10px 10px, 10px 5px, 15px 5px, 15px 0%,
+                    calc(100% - 15px) 0%, calc(100% - 15px) 5px, calc(100% - 10px) 5px, calc(100% - 10px) 10px, calc(100% - 5px) 10px, calc(100% - 5px) 15px, 100% 15px,
+                    100% calc(100% - 15px), calc(100% - 5px) calc(100% - 15px), calc(100% - 5px) calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), calc(100% - 10px) calc(100% - 5px), calc(100% - 15px) calc(100% - 5px), calc(100% - 15px) 100%,
+                    15px 100%, 15px calc(100% - 5px), 10px calc(100% - 5px), 10px calc(100% - 10px), 5px calc(100% - 10px), 5px calc(100% - 15px), 0% calc(100% - 15px));
+            background: linear-gradient(180deg, #42A5F5 0%, #1E88E5 50%, #1565C0 100%);
+        }
+
+        .detail-term {
+            font-family: 'Jersey 25', cursive;
+            font-size: clamp(30px, 6vw, 48px);
+            color: #FFFFFF;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+            text-align: center !important;
+            z-index: 2;
+            width: 100%;
+            text-align: center;
+            word-wrap: break-word;
+            padding: 0 10px;
+        }
+
+        /* Audio icon styling */
+        .audio-icon {
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            padding: 4px;
+            background-color: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+
+        .audio-icon:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+
+        .audio-icon svg {
+            width: 14px;
+            height: 14px;
+            fill: #FFD700;
+        }
+
+        .audio-icon.playing svg {
+            fill: #FF6B6B;
+        }
+
+        /* White Video Box */
+        .video-box {
+            background: #FFFFFF;
+            width: calc(100% - 30px);
+            height: 300px;
+            margin: 0 0 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 0 0 6px #FFC107, inset 0 2px 5px rgba(0, 0, 0, 0.05);
+            clip-path: polygon(0% 12px, 4px 12px, 4px 8px, 8px 8px, 8px 4px, 12px 4px, 12px 0%,
+                    calc(100% - 12px) 0%, calc(100% - 12px) 4px, calc(100% - 8px) 4px, calc(100% - 8px) 8px, calc(100% - 4px) 8px, calc(100% - 4px) 12px, 100% 12px,
+                    100% calc(100% - 12px), calc(100% - 4px) calc(100% - 12px), calc(100% - 4px) calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) calc(100% - 4px), calc(100% - 12px) calc(100% - 4px), calc(100% - 12px) 100%,
+                    12px 100%, 12px calc(100% - 4px), 8px calc(100% - 4px), 8px calc(100% - 8px), 4px calc(100% - 8px), 4px calc(100% - 12px), 0% calc(100% - 12px));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #333, #555);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Jersey 25', cursive;
+            font-size: 18px;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .video-placeholder svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+            fill: #FFD700;
+        }
+
+        /* Video element styling */
+        .detail-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        /* Image element styling */
+        .detail-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        /* Content Area */
+        .detail-content {
+            width: calc(100% - 30px);
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            z-index: 2;
+        }
+
+        .detail-section-title {
+            font-family: 'Jersey 25', cursive;
+            font-size: clamp(22px, 4vw, 35px);
+            color: #000000;
+            margin: 0 0 8px 0;
+            text-transform: uppercase;
+            text-shadow:
+                -1px -1px 0 #fff,
+                1px -1px 0 #fff,
+                -1px 1px 0 #fff,
+                1px 1px 0 #fff,
+                -2px -2px 0 #fff,
+                2px -2px 0 #fff,
+                -2px 2px 0 #fff,
+                2px 2px 0 #fff;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .detail-text {
+            font-family: 'Jersey 10';
+            font-size: clamp(16px, 3vw, 24px);
+            font-weight: 400;
+            color: #FFFFFF;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .detail-section-with-audio {
+            position: relative;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        /* Kasaysayan Section - Now part of Home */
+        .kasaysayan-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 5%;
+            background: url('./images/bg5.png') center/cover no-repeat;
+        }
+
+        .kasaysayan-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Changed from space-between to center */
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 40px;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .kasaysayan-title {
+            font-family: 'Jersey 25', cursive;
+            font-size: clamp(40px, 8vw, 80px);
+            color: #FFD700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow:
+                3px 3px 0px #D32F2F,
+                6px 6px 0px rgba(0, 0, 0, 0.3);
+            margin: 0;
+            text-align: center;
+            /* Added to ensure text is centered */
+            width: 100%;
+            /* Added to ensure full width */
+        }
+
+        .kasaysayan-content {
+            max-width: 1200px;
+            width: 100%;
+            background: linear-gradient(180deg, #1E88E5 0%, #1565C0 100%);
+            border: 6px solid #FFC107;
+            border-radius: 15px;
+            padding: 25px;
+            font-family: 'Jersey 25', cursive;
+            font-size: clamp(18px, 3vw, 24px);
+            color: #FFFFFF;
+            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 0 0 #FF9800, inset 0 2px 5px rgba(0, 0, 0, 0.2);
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        /* ========== RESPONSIVE MEDIA QUERIES ========== */
+
+        /* For tablets and smaller desktops */
+        @media (max-width: 1024px) {
+            .hero {
+                padding: 0 40px;
+            }
+
+            .hero h1 {
+                margin-top: 100px;
+            }
+
+            .carousel-card {
+                min-width: 250px;
+                height: 350px;
+            }
+
+            .kagamitan-grid,
+            .materyales-grid,
+            .proseso-grid,
+            .gampanin-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .detail-card {
+                height: auto;
+                min-height: 650px;
+            }
+        }
+
+        /* For tablets */
+        @media (max-width: 768px) {
+
+            /* Show hamburger menu */
+            .hamburger {
+                display: flex;
+            }
+
+            /* Hide desktop nav links */
+            .nav-right {
+                display: none;
+            }
+
+            /* Mobile menu active state */
+            .mobile-menu.active {
+                display: flex;
+            }
+
+            .hero {
+                padding: 0 30px;
+                min-height: 500px;
+            }
+
+            .hero h1 {
+                font-size: clamp(40px, 10vw, 60px);
+                margin-top: 80px;
+            }
+
+            .hero p {
+                font-size: clamp(14px, 3.5vw, 18px);
+            }
+
+            nav {
+                padding: 15px 20px;
+            }
+
+            .carousel-section,
+            .kasaysayan-section {
+                padding: 60px 15px;
+            }
+
+            .carousel-section h2,
+            .kasaysayan-title {
+                font-size: clamp(30px, 8vw, 50px);
+                margin-bottom: 30px;
+            }
+
+            .carousel-card {
+                min-width: 220px;
+                height: 320px;
+                margin: 0 8px;
+            }
+
+            .card-title {
+                font-size: 22px;
+            }
+
+            .card-description {
+                font-size: 14px;
+            }
+
+            .kagamitan-grid,
+            .materyales-grid,
+            .proseso-grid,
+            .gampanin-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .kagamitan-header,
+            .materyales-header,
+            .proseso-header,
+            .gampanin-header,
+            .detail-header,
+            .kasaysayan-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .kagamitan-title,
+            .materyales-title,
+            .proseso-title,
+            .gampanin-title,
+            .detail-title,
+            .kasaysayan-title {
+                font-size: clamp(30px, 7vw, 50px);
+                text-align: center;
+            }
+
+            .back-button {
+                align-self: center;
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+
+            .detail-term {
+                font-size: clamp(24px, 5vw, 32px);
+            }
+
+            .detail-section-title {
+                font-size: clamp(18px, 3.5vw, 24px);
+            }
+
+            .detail-card {
+                height: auto;
+                min-height: 600px;
+            }
+
+            .video-box {
+                height: 250px;
+            }
+
+            .kasaysayan-content {
+                padding: 20px;
+                font-size: clamp(16px, 2.5vw, 20px);
+            }
+        }
+
+        /* For mobile phones */
+        @media (max-width: 480px) {
+            .hero {
+                padding: 0 20px;
+                min-height: 450px;
+            }
+
+            .hero h1 {
+                font-size: 80px;
+                letter-spacing: 2px;
+                margin-top: 70px;
+            }
+
+            .hero p {
+                font-size: 24px;
+                line-height: 1.4;
+            }
+
+            .scroll-down svg {
+                width: 35px;
+                height: 35px;
+            }
+
+            nav {
+                padding: 12px 15px;
+            }
+
+            .carousel-section,
+            .kasaysayan-section {
+                padding: 50px 10px;
+            }
+
+            .carousel-section h2,
+            .kasaysayan-title {
+                font-size: clamp(28px, 9vw, 40px);
+                margin-bottom: 20px;
+            }
+
+            .carousel-container {
+                min-height: 350px;
+            }
+
+            .carousel-card {
+                min-width: 200px;
+                height: 300px;
+                margin: 0 5px;
+            }
+
+            .carousel-wrapper {
+                padding: 5px;
+            }
+
+            .card-inner {
+                padding: 12px;
+            }
+
+            .card-content {
+                height: 140px;
+            }
+
+            .card-title {
+                font-size: 20px;
+            }
+
+            .card-description {
+                font-size: 12px;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .kagamitan-section,
+            .materyales-section,
+            .proseso-section,
+            .gampanin-section,
+            .detail-section {
+                padding: 100px 15px 30px;
+            }
+
+            .kagamitan-grid,
+            .materyales-grid,
+            .proseso-grid,
+            .gampanin-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .kagamitan-button {
+                padding: 15px 10px;
+                min-height: 85px;
+            }
+
+            .kagamitan-button>span {
+                font-size: 16px;
+            }
+
+            .kagamitan-title,
+            .materyales-title,
+            .proseso-title,
+            .gampanin-title,
+            .detail-title,
+            .kasaysayan-title {
+                font-size: clamp(28px, 8vw, 36px);
+            }
+
+            .back-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .detail-term {
+                font-size: clamp(22px, 6vw, 28px);
+            }
+
+            .detail-section-title {
+                font-size: clamp(16px, 3vw, 20px);
+            }
+
+            .detail-card {
+                min-height: 550px;
+            }
+
+            .video-box {
+                height: 200px;
+            }
+
+            .video-placeholder {
+                font-size: 16px;
+            }
+
+            .video-placeholder svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            .detail-text {
+                font-size: 14px;
+            }
+
+            .audio-icon {
+                width: 22px;
+                height: 22px;
+            }
+
+            .audio-icon svg {
+                width: 12px;
+                height: 12px;
+            }
+
+            .kasaysayan-content {
+                padding: 15px;
+                font-size: 14px;
+                line-height: 1.4;
+            }
+
+            .mobile-menu {
+                width: 85%;
+                padding: 70px 20px 20px;
+            }
+
+            .mobile-menu a {
+                font-size: 20px;
+                padding: 12px 0;
+            }
+        }
+
+        /* For very small screens */
+        @media (max-width: 360px) {
+            .hero h1 {
+                font-size: 70px;
+            }
+
+            .hero p {
+                font-size: 21px;
+            }
+
+            .carousel-card {
+                min-width: 180px;
+                height: 280px;
+            }
+
+            .card-title {
+                font-size: 18px;
+            }
+
+            .kagamitan-button>span {
+                font-size: 14px;
+            }
+
+            .kagamitan-title,
+            .materyales-title,
+            .proseso-title,
+            .gampanin-title,
+            .detail-title,
+            .kasaysayan-title {
+                font-size: 26px;
+            }
+
+            .detail-term {
+                font-size: 20px;
+            }
+        }
+
+        /* Landscape orientation fixes */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding-top: 80px;
+                padding-bottom: 40px;
+            }
+
+            .hero h1 {
+                margin-top: 20px;
+            }
+
+            .carousel-section,
+            .kasaysayan-section {
+                min-height: auto;
+                padding: 60px 20px;
+            }
+
+            .kagamitan-section,
+            .materyales-section,
+            .proseso-section,
+            .gampanin-section,
+            .detail-section {
+                min-height: auto;
+                padding-top: 100px;
+            }
+
+            .detail-card {
+                min-height: 500px;
+            }
+        }
+
+        /* Prevent horizontal scrolling */
+        html,
+        body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-left">
+            <a href="#" onclick="showHome()" class="active">Home</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" onclick="showGlosaryo()">Glosaryo</a>
+            <a href="#" onclick="scrollToKasaysayan()">Kasaysayan</a>
+        </div>
+        <!-- Hamburger Menu Button -->
+        <button class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#" onclick="showHomeMobile()" class="active">Home</a>
+        <a href="#" onclick="showGlosaryoMobile()">Glosaryo</a>
+        <a href="#" onclick="scrollToKasaysayanMobile()">Kasaysayan</a>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Home Section (includes Hero, Carousel, and Kasaysayan) -->
+    <section id="home">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>GLOSARYO</h1>
+            <p>
+                Isang makulay na kalipunan ng mga salitang humuhubog sa mundo ng kartunan. Mga terminong may sariling
+                buhay,
+                at kuwento sa bawat sulok ng industriya.
+            </p>
+            <div class="scroll-down" onclick="scrollToCarousel()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+                    <path d="M7.41 14.59L12 19.17l4.59-4.58L18 16l-6 6-6-6 1.41-1.41z" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Carousel Section (now part of Home) -->
+        <div class="carousel-section">
+            <h2>GLOSARYO</h2>
+            <div class="carousel-container">
+                <div class="carousel-wrapper" id="carouselWrapper">
+                    <div class="carousel-card card-blue" onclick="showKagamitan()">
+                        <div class="card-blue-bg"></div>
+                        <div class="card-inner">
+                            <div class="card-content">
+                                <img src="./images/kagamitan.jpg?height=200&width=300" alt="Tradisyon"
+                                    class="card-image">
+                            </div>
+                            <h3 class="card-title">kagamitan</h3>
+                            <p class="card-description">Mga kahulugan ng mga<br>Salita sa Kagamitan</p>
+                        </div>
+                    </div>
+                    <div class="carousel-card card-red" onclick="showMateryales()">
+                        <div class="card-red-bg"></div>
+                        <div class="card-inner">
+                            <div class="card-content">
+                                <img src="./images/materyales.jpg?height=200&width=300" alt="Tradisyon"
+                                    class="card-image">
+                            </div>
+                            <h3 class="card-title">Materyales</h3>
+                            <p class="card-description">Mga kahulugan ng mga<br>Salita sa Materyales</p>
+                        </div>
+                    </div>
+                    <div class="carousel-card card-yellow" onclick="showProseso()">
+                        <div class="card-yellow-bg"></div>
+                        <div class="card-inner">
+                            <div class="card-content">
+                                <img src="./images/proseso.jpg?height=200&width=300" alt="Tradisyon" class="card-image">
+                            </div>
+                            <h3 class="card-title">Proseso</h3>
+                            <p class="card-description">Mga Kahulugan ng mga Salita sa Proseso</p>
+                        </div>
+                    </div>
+                    <div class="carousel-card card-green" onclick="showGampanin()">
+                        <div class="card-green-bg"></div>
+                        <div class="card-inner">
+                            <div class="card-content">
+                                <img src="./images/bg1.gif?height=200&width=300" alt="Tradisyon" class="card-image">
+                            </div>
+                            <h3 class="card-title">Gampanin</h3>
+                            <p class="card-description">Mga salitang ginagamit sa Pagtukoy ng iba't ibang gampanin ng
+                                mga Mananabas sa Veinte Reales, Lungsod ng Valenzuela</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-btn" onclick="moveCarousel(-1)">‹</button>
+                <button class="carousel-btn" onclick="moveCarousel(1)">›</button>
+            </div>
+        </div>
+
+        <!-- Kasaysayan Section (now part of Home) -->
+        <div class="kasaysayan-section" id="kasaysayan">
+            <div class="kasaysayan-header">
+                <h2 class="kasaysayan-title">KASAYSAYAN</h2>
+            </div>
+            <div class="kasaysayan-content">
+                Ang kartunan ay nabuo noong taong 1975 sa pangunguna ng mag-asawang Boyet Licaros at Elsa Licaros na
+                itinatag sa ilalim
+                ng kumpanyang pinangalanang Boyet Box Maker. Matatagpuan ito sa Veinte Reales, Valenzuela sa bahaging
+                hangganan nito sa
+                Bancal Extension, Lungsod ng Meycauayan. Binubuo ang buong lawak na sakop ng kanilang lupa ang kartunan,
+                lote, bodega,
+                kabahayan, at maliit na farm. Mula sa malawak na kalupaan, nakalaan ang limang imprastraktura bilang
+                pagawaan at bodega
+                ng mga mananabas ng karton. Ang natira namang mga lote ay ginagamit para sa kabahayan at farm. Noong
+                araw ay
+                nasa
+                mahigit sa tatlumpung mga manggagawa ang tinatayang nagtatrabaho sa loob ng Kartunan, walang tiyak na
+                bilang
+                dahil sa
+                pansamantala lamang ang nagtatrabaho na nagbabago sa bawat buwan at taon.
+
+                <br><br>
+                Ang kumpanyang ito ay nagkaroon ng mga tumatangkilik buhat ng malawakang pagmanupaktura nito ng mga
+                kahon na
+                nagagamit
+                sa ilang produkto katulad na lamang ng CHK foods, Cassava, pako, at marami pang iba.
+
+                <br><br>
+                Gayunpaman, idineklara noong ika-16 ng Marso, 2020 ang malawakang enhanced community quarantine sa buong
+                Luzon
+                (Relativo, 2020). Nagpatuloy ito sa sumunod na mga buwan at taon na ang buong bansa ay sumailalim sa
+                lockdown. Bunga ng
+                mahigpit na pagbabawal at paglilimita ng interaksyong pisikal at paglabas, naging malaking dagok ito sa
+                mga
+                Micro,
+                Small, Medium-sized Enterprises (MSMEs) tulad ng kartunan. Nagdulot ito ng paghina ng kartunan dahil sa
+                kawalan ng
+                mamimili at tagapagpadala ng mga materyales. Kasabay nito ang pag-alis ng malaking bilang ng mga
+                mananabas
+                ng karton,
+                hanggang sa maging anim hanggang sampu na lamang ang aktibong gumagawa sa loob nito. Kasalukuyan ding
+                dalawang
+                imprastraktura na lamang ang nagagamit; (1) pagawaan; at (2) bodega.
+                <br><br>
+
+                WIKANG SINASALITA NG MGA MANANABAS SA LOOB NG KARTUNAN:
+                <br>
+                • Bicolano<br>
+                • Bisaya<br>
+                • Pangasinense<br>
+                • Tagalog<br>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kagamitan Section -->
+    <section class="kagamitan-section" id="kagamitan">
+        <div class="kagamitan-header">
+            <h2 class="kagamitan-title">KAGAMITAN</h2>
+            <button class="back-button" onclick="showHome()">Bumalik</button>
+        </div>
+        <div class="kagamitan-grid">
+            <button class="kagamitan-button" onclick="showDetail('Iskoring o pagulungan', 'kagamitan')">
+                <span>Iskoring o pagulungan</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Islatan', 'kagamitan')">
+                <span>Islatan</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Kater', 'kagamitan')">
+                <span>Kater</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Malaking mukha', 'kagamitan')">
+                <span>Malaking mukha</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Maliit na mukha', 'kagamitan')">
+                <span>Maliit na mukha</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Mukha', 'kagamitan')">
+                <span>Mukha</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Panghagod', 'kagamitan')">
+                <span>Panghagod</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pang-imprenta', 'kagamitan')">
+                <span>Pang-imprenta</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pintura', 'kagamitan')">
+                <span>Pintura</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Materyales Section -->
+    <section class="materyales-section" id="materyales">
+        <div class="materyales-header">
+            <h2 class="materyales-title">MATERYALES</h2>
+            <button class="back-button" onclick="showHome()">Bumalik</button>
+        </div>
+        <div class="materyales-grid">
+            <button class="kagamitan-button" onclick="showDetail('Brand new', 'materyales')">
+                <span>Brand new</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Del Monte', 'materyales')">
+                <span>Del Monte</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Dila', 'materyales')">
+                <span>Dila</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Double', 'materyales')">
+                <span>Double</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Gawgaw', 'materyales')">
+                <span>Gawgaw</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Karton', 'materyales')">
+                <span>Karton</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Kola', 'materyales')">
+                <span>Kola</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Panapi', 'materyales')">
+                <span>Panapi</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pandugtong', 'materyales')">
+                <span>Pandugtong</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pantapal', 'materyales')">
+                <span>Pantapal</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Partisyon', 'materyales')">
+                <span>Partisyon</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Segunda Mano o lokal', 'materyales')">
+                <span>Segunda Mano o lokal</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Scrap', 'materyales')">
+                <span>Scrap</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Single', 'materyales')">
+                <span>Single</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Sosa', 'materyales')">
+                <span>Sosa</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Tsinelas', 'materyales')">
+                <span>Tsinelas</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Proseso Section -->
+    <section class="proseso-section" id="proseso">
+        <div class="proseso-header">
+            <h2 class="proseso-title">PROSESO</h2>
+            <button class="back-button" onclick="showHome()">Bumalik</button>
+        </div>
+        <div class="proseso-grid">
+            <button class="kagamitan-button" onclick="showDetail('Deliver', 'proseso')">
+                <span>Deliver</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Dudugtungan', 'proseso')">
+                <span>Dudugtungan</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Export', 'proseso')">
+                <span>Export</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Hahagurin', 'proseso')">
+                <span>Hahagurin</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Import', 'proseso')">
+                <span>Import</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pagbabaliktad', 'proseso')">
+                <span>Pagbabaliktad</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pag-iimprenta', 'proseso')">
+                <span>Pag-iimprenta</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pag-iislat', 'proseso')">
+                <span>Pag-iislat</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pagkakamada', 'proseso')">
+                <span>Pagkakamada</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pagpapagulong', 'proseso')">
+                <span>Pagpapagulong</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pagpapakwenta', 'proseso')">
+                <span>Pagpapakwenta</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pagpapaldo', 'proseso')">
+                <span>Pagpapaldo</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pagtatabas', 'proseso')">
+                <span>Pagtatabas</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pagtatapal', 'proseso')">
+                <span>Pagtatapal</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pakyawan', 'proseso')">
+                <span>Pakyawan</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Pick up', 'proseso')">
+                <span>Pick up</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Reject', 'proseso')">
+                <span>Reject</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Repair', 'proseso')">
+                <span>Repair</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Rush', 'proseso')">
+                <span>Rush</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Sinasapian', 'proseso')">
+                <span>Sinasapian</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Yayariin', 'proseso')">
+                <span>Yayariin</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Gampanin Section -->
+    <section class="gampanin-section" id="gampanin">
+        <div class="gampanin-header">
+            <h2 class="gampanin-title">GAMPANIN</h2>
+            <button class="back-button" onclick="showHome()">Bumalik</button>
+        </div>
+        <div class="gampanin-grid">
+            <button class="kagamitan-button" onclick="showDetail('Katiwala', 'gampanin')">
+                <span>Katiwala</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Mananabas', 'gampanin')">
+                <span>Mananabas</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Taas o amo', 'gampanin')">
+                <span>Taas o amo</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Tagaimprenta', 'gampanin')">
+                <span>Tagaimprenta</span>
+            </button>
+            <button class="kagamitan-button" onclick="showDetail('Tagapaldo', 'gampanin')">
+                <span>Tagapaldo</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Detail Section - Card Style with Video -->
+    <section class="detail-section" id="detail">
+        <div class="detail-header">
+            <h2 class="detail-title" id="detailTitle">DETAIL</h2>
+            <button class="back-button" onclick="goBackToPreviousSection()">Bumalik</button>
+        </div>
+        <div class="detail-card">
+            <div class="detail-card-bg"></div>
+            <div class="detail-card-inner">
+                <h3 class="detail-term" id="detailTerm">
+                    Islatan
+                </h3>
+
+                <!-- White Video Box - Exactly like in the image -->
+                <div class="video-box">
+                    <div class="video-placeholder" id="videoPlaceholder">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                        <div>Video Demonstration</div>
+                    </div>
+                    <video id="detailVideo" class="detail-video" controls muted style="display: none;">
+                        Your browser does not support the video tag.
+                    </video>
+                    <img id="detailImage" class="detail-image" style="display: none;" alt="Term Image">
+                </div>
+
+                <!-- Content Area with separate audio buttons -->
+                <div class="detail-content">
+                    <div class="detail-section-with-audio">
+                        <h4 class="detail-section-title">
+                            Kahulugan:
+                            <div class="audio-icon" id="definitionAudioIcon" onclick="toggleAudio('definition')">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                                </svg>
+                            </div>
+                        </h4>
+                        <p class="detail-text" id="detailDefinition">Isang bahagi ng kater na nagsisilbing gabay sa
+                            paghahati para malagyan ng islat ang karton.</p>
+                    </div>
+
+                    <div class="detail-section-with-audio">
+                        <h4 class="detail-section-title">
+                            Gamit sa pangungusap:
+                            <div class="audio-icon" id="usageAudioIcon" onclick="toggleAudio('usage')">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                                </svg>
+                            </div>
+                        </h4>
+                        <p class="detail-text" id="detailUsage">Itinapat ni higo ang karton sa islatan upang makuha ang
+                            tamang islat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentIndex = 0;
+        let currentSection = 'home';
+        let previousSection = 'home';
+        let currentAudio = null;
+        let currentDetailTerm = '';
+
+        // Video mapping for each term - Only for Proseso section
+        const videoMap = {
+            'Deliver': './videos/pagkakarpintero.mp4',
+            'Dudugtungan': './videos/Dudugtungan.MOV',
+            'Export': './videos/pagkukulay.mp4',
+            'Hahagurin': './videos/Hahagurin.MOV',
+            'Import': './videos/pagtutupi.mp4',
+            'Pagbabaliktad': './videos/paggugupit.mp4',
+            'Pag-iimprenta': './videos/Pag-iimprenta.MOV',
+            'Pag-iislat': './videos/paggugupit.mp4',
+            'Pagkakamada': './videos/paggugupit.mp4',
+            'Pagpapagulong': './videos/paggugupit.mp4',
+            'Pagpapakwenta': './videos/paggugupit.mp4',
+            'Pagpapaldo': './videos/paggugupit.mp4',
+            'Pagtatabas': './videos/Tabas.MOV',
+            'Pagtatapal': './videos/Pagtatapal.MOV',
+            'Pakyawan': './videos/paggugupit.mp4',
+            'Pick up': './videos/paggugupit.mp4',
+            'Reject': './videos/paggugupit.mp4',
+            'Repair': './videos/paggugupit.mp4',
+            'Rush': './videos/paggugupit.mp4',
+            'Sinasapian': './videos/paggugupit.mp4',
+            'Yayariin': './videos/paggugupit.mp4'
+        };
+
+        // Image mapping for other sections
+        const imageMap = {
+            // Kagamitan images
+            'Islatan': './images/islatan.jpg',
+            'Iskoring o pagulungan': './images/Pagulungan.jpg',
+            'Kater': './images/Kater.jpg',
+            'Malaking mukha': './images/Malaking mukha.jpg',
+            'Maliit na mukha': './images/Maliit na mukha.jpg',
+            'Mukha': './images/Mukha o face.jpg',
+            'Panghagod': './images/Panghagod.jpg',
+            'Pang-imprenta': './images/Pang-imprenta.jpg',
+            'Pintura': './images/pintura.jpg',
+
+            // Materyales images
+            'Brand new': './images/Brand new.jpg',
+            'Del Monte': './images/Del monte.jpg',
+            'Dila': './images/dila.jpg',
+            'Double': './images/double.jpg',
+            'Gawgaw': './images/Gawgaw.jpg',
+            'Karton': './images/karton.jpg',
+            'Kola': './images/Kola.jpg',
+            'Panapi': './images/Panapi.jpg',
+            'Pandugtong': './images/Pandugtong.jpg',
+            'Pantapal': './images/Pantapal.jpg',
+            'Partisyon': './images/Partisyon.jpg',
+            'Segunda Mano o lokal': './images/Segunda mano o lokal.jpg',
+            'Scrap': './images/Scrap.jpg',
+            'Single': './images/single.jpg',
+            'Sosa': './images/Sosa.jpg',
+            'Tsinelas': './images/tsinelas.jpg',
+
+            // Gampanin images
+            'Mananabas': './images/mananabas.jpg',
+            'Katiwala': './images/katiwala.jpg',
+            'Taas o amo': './images/Taas o amo.jpg',
+            'Tagaimprenta': './images/tagaimprenta.jpg',
+            'Tagapaldo': './images/tagapaldo.jpg'
+        };
+
+        // Audio mapping for definitions
+        const definitionAudioMap = {
+            // Kagamitan definition audio
+            'Islatan': './audio/kagamitan-k/islatan.m4a',
+            'Iskoring o pagulungan': './audio/kagamitan-k/iskoring Kahulugan.m4a',
+            'Kater': './audio/kagamitan-k/kater.m4a',
+            'Malaking mukha': './audio/kagamitan-k/malking mukha kahulugan.m4a',
+            'Maliit na mukha': './audio/kagamitan-k/maliit na mukha kahulugan.m4a',
+            'Mukha': './audio/kagamitan-k/mukha kahulugan.m4a',
+            'Panghagod': './audio/kagamitan-k/panghagod kahulugan.m4a',
+            'Pang-imprenta': './audio/kagamitan-k/pang imprenta kahukugan.m4a',
+            'Pintura': './audio/kagamitan-k/pintura kahulugan.m4a',
+
+            // Materyales definition audio
+            'Brand new': './audio/materyales-k/1. brand new kahulugan matwryales.m4a',
+            'Del Monte': './audio/materyales-k/2. del monte kahulugan materyales.m4a',
+            'Dila': './audio/materyales-k/dila_definition.m4a',
+            'Double': './audio/materyales-k/3 double materyales kahulugan.m4a',
+            'Gawgaw': './audio/materyales-k/4. gawgaw materyales kahukugan.m4a',
+            'Karton': './audio/materyales-k/5. karton materyales kahulugan.m4a',
+            'Kola': './audio/materyales-k/6. kola mayeryales kahilugan.m4a',
+            'Panapi': './audio/materyales-k/7 panapi kahulugan materyales.m4a',
+            'Pandugtong': './audio/materyales-k/8. pandugtong kagukugan materyales.m4a',
+            'Pantapal': './audio/materyales-k/9 pantapal kahulugan materyales.m4a',
+            'Partisyon': './audio/materyales-k/10 partisyon materyales kahulugan.m4a',
+            'Segunda Mano o lokal': './audio/materyales-k/11 segunda mano o lokal kahukugan materyales.m4a',
+            'Scrap': './audio/materyales-k/12 scrap kahukugan materyales.m4a',
+            'Single': './audio/materyales-k/13 single kahulugan mareryales.m4a',
+            'Sosa': './audio/materyales-k/14 sosa kahukugan materyales.m4a',
+            'Tsinelas': './audio/materyales-k/15 tsinelas kahikuhan matwryales.m4a',
+
+            // Proseso definition audio
+            'Deliver': './audio/proseso-k/1 deliver proseso.m4a',
+            'Dudugtungan': './audio/proseso-k/2 duduftungan proswso.m4a',
+            'Export': './audio/proseso-k/3 export kahiluhan proseso.m4a',
+            'Hahagurin': './audio/proseso-k/4 hahagurin proseso.m4a',
+            'Import': './audio/proseso-k/5 import kahulugan proseso.m4a',
+            'Pagbabaliktad': './audio/proseso-k/6 pagbabalikyad proseso.m4a',
+            'Pag-iimprenta': './audio/proseso-k/7 pah iimprenta proseso.m4a',
+            'Pag-iislat': './audio/proseso-k/8 pahiislay proseso.m4a',
+            'Pagkakamada': './audio/proseso-k/9 pagkakamada proseso.m4a',
+            'Pagpapagulong': './audio/proseso-k/10 pagpapagulong oroseso.m4a',
+            'Pagpapakwenta': './audio/proseso-k/11 pagpapkwenta proseso.m4a',
+            'Pagpapaldo': './audio/proseso-k/12 pagpapaldo proseso.m4a',
+            'Pagtatabas': './audio/proseso-k/13 pagtatabqs proseso.m4a',
+            'Pagtatapal': './audio/proseso-k/14 pagtatapal proseso.m4a',
+            'Pakyawan': './audio/proseso-k/15 palyawan proseso.m4a',
+            'Pick up': './audio/proseso-k/16 pickup proseso.m4a',
+            'Reject': './audio/proseso-k/17 reject proseso.m4a',
+            'Repair': './audio/proseso-k/18 repair proseso.m4a',
+            'Rush': './audio/proseso-k/19 rush proseso.m4a',
+            'Sinasapian': './audio/proseso-k/20 sinasapian proseso.m4a',
+            'Yayariin': './audio/proseso-k/21 yayariin proseso.m4a',
+
+            // Gampanin definition audio
+            'Katiwala': './audio/gampanin-k/1 katiwala gmapmanin.m4a',
+            'Mananabas': './audio/gampanin-k/2 mananabas gamapanin.m4a',
+            'Taas o amo': './audio/gampanin-k/3 taas o amo gampanin.m4a',
+            'Tagaimprenta': './audio/gampanin-k/4 taga imprenta gampanin.m4a',
+            'Tagapaldo': './audio/gampanin-k/5 tagapaldo gampanin.m4a'
+        };
+
+        // Audio mapping for usage examples
+        const usageAudioMap = {
+            // Kagamitan usage audio
+            'Islatan': './audio/kagamitan-p/2. Islatan.m4a',
+            'Iskoring o pagulungan': './audio/kagamitan-p/1. Kagamitan (skoring).m4a',
+            'Kater': './audio/kagamitan-p/3. kater.m4a',
+            'Malaking mukha': './audio/kagamitan-p/4. Malaking mukha.m4a',
+            'Maliit na mukha': './audio/kagamitan-p/5. Maliit na mukha.m4a',
+            'Mukha': './audio/kagamitan-p/6. Mukha.m4a',
+            'Panghagod': './audio/kagamitan-p/7. Panghagod.m4a',
+            'Pang-imprenta': './audio/kagamitan-p/8. Pang-imprenta.m4a',
+            'Pintura': './audio/kagamitan-p/9. pintura.m4a',
+
+            // Materyales usage audio
+            'Brand new': './audio/materyales-p/1. Brand new.m4a',
+            'Del Monte': './audio/materyales-p/2. Del monte.m4a',
+            'Dila': './audio/materyales-p/1. Dila.m4a',
+            'Double': './audio/materyales-p/3. Double.m4a',
+            'Gawgaw': './audio/materyales-p/4. Gawgaw.m4a',
+            'Karton': './audio/materyales-p/5. karton.m4a',
+            'Kola': './audio/materyales-p/6. kola.m4a',
+            'Panapi': './audio/materyales-p/7. Panapi.m4a',
+            'Pandugtong': './audio/materyales-p/8. Pandugtong.m4a',
+            'Pantapal': './audio/materyales-p/9. Pantapal.m4a',
+            'Partisyon': './audio/materyales-p/10. Partisyon.m4a',
+            'Segunda Mano o lokal': './audio/materyales-p/11. Segunda mano.m4a',
+            'Scrap': './audio/materyales-p/12. Scrap.m4a',
+            'Single': './audio/materyales-p/13. single.m4a',
+            'Sosa': './audio/materyales-p/14. sosa.m4a',
+            'Tsinelas': './audio/materyales-p/15. Tsinelas.m4a',
+
+            // Proseso usage audio
+            'Deliver': './audio/proseso-p/1. Deliver.m4a',
+            'Dudugtungan': './audio/proseso-p/2. Dudugtungan.m4a',
+            'Export': './audio/proseso-p/3. Export.m4a',
+            'Hahagurin': './audio/proseso-p/4. hahagurin.m4a',
+            'Import': './audio/proseso-p/5. import.m4a',
+            'Pagbabaliktad': './audio/proseso-p/6. Pagbabaliktad.m4a',
+            'Pag-iimprenta': './audio/proseso-p/7. Pag-iimprenta.m4a',
+            'Pag-iislat': './audio/proseso-p/8. Pag-iislat.m4a',
+            'Pagkakamada': './audio/proseso-p/9. pagkakamada.m4a',
+            'Pagpapagulong': './audio/proseso-p/10. Pagpapagulong.m4a',
+            'Pagpapakwenta': './audio/proseso-p/11. pagpapakwenta.m4a',
+            'Pagpapaldo': './audio/proseso-p/12. Pagpapaldo.m4a',
+            'Pagtatabas': './audio/proseso-p/13. pagtatabas.m4a',
+            'Pagtatapal': './audio/proseso-p/14. Pagtatapal.m4a',
+            'Pakyawan': './audio/proseso-p/15. Pakyawan.m4a',
+            'Pick up': './audio/proseso-p/16. Pick up.m4a',
+            'Reject': './audio/proseso-p/17. Reject.m4a',
+            'Repair': './audio/proseso-p/18. Repair.m4a',
+            'Rush': './audio/proseso-p/19. rush.m4a',
+            'Sinasapian': './audio/proseso-p/20. Sinasapian.m4a',
+            'Yayariin': './audio/proseso-p/21. yayariin.m4a',
+
+            // Gampanin usage audio
+            'Katiwala': './audio/gampanin-p/1. Katiwala.m4a',
+            'Mananabas': './audio/gampanin-p/2. Mananabas.m4a',
+            'Taas o amo': './audio/gampanin-p/3. Taas.m4a',
+            'Tagaimprenta': './audio/gampanin-p/4. Tagaimprenta.m4a',
+            'Tagapaldo': './audio/gampanin-p/5. tagapaldo.m4a'
+        };
+
+        // Content mapping for each term
+        const contentMap = {
+            'Islatan': {
+                definition: 'Islatan- Isang bahagi ng kater na nagsisilbing gabay sa paghahati para malagyan ng islat ang karton.',
+                usage: 'Itinapat ni Iñigo ang karton sa islatan upang makuha ang tamang islat.'
+            },
+            'Iskoring o pagulungan': {
+                definition: 'Isang makinarya na nagbibigay ng tupi sa magkabilang bahagi ng karton.',
+                usage: ' Ipinadaan ni Miguel ang karton sa iskoring upang magkaroon ito ng pantay na tupi.'
+            },
+            'Kater': {
+                definition: 'Ginagamit sa paggugupit at paghahati ng mga karton. ',
+                usage: 'Gumamit sila ng kater upang maayos na maputol ang karton.'
+            },
+            'Malaking mukha': {
+                definition: 'Kaliwang bahagi ng karton na del monte na may sukat na 12 pulgada. ',
+                usage: 'Maingat na sinusukat ni Damian ang malaking mukha ng karton ng Del Monte upang matiyak na magiging matibay ang kahong binubuo nila.'
+            },
+            'Maliit na mukha': {
+                definition: 'IKanan na bahagi ng karton na del monte na may sukat na may 9 pulgada.',
+                usage: 'Hindi na ipinatabas ni Solomon ang maliit na mukha ng karton dahil tama na ang sukat nito.'
+            },
+            'Mukha': {
+                definition: 'Tumutukoy sa dalawang bahagi ng kabuoang lapad ng karton.',
+                usage: 'Titingnan muna ninyo kung tama ba ang sukat ng dalawang mukha ng karton bago tabasin.'
+            },
+            'Panghagod': {
+                definition: 'Isang kahoy na kagamitan na may makinis na texture tulad ng hawakan ng kutsilyo na ginagamit sa pag-aayos ng tupi ng karton. ',
+                usage: 'Ginamitan ni Anton ng panghagod ang karton upang mapakinis ang tupi nito."'
+            },
+            'Pang-imprenta': {
+                definition: 'isang kagamitan na ginagamitan ng pintura at hinahagod gamit ang tsinelas.',
+                usage: 'Matagal na hinanap ni Josie ang pang - imprenta dahil nawawala ito ng ilang linggo na.'
+            },
+            'Pintura': {
+                definition: 'Isang likido na hinahaluan ng harina na ginagamit sa pag-iimprenta ng karton.',
+                usage: 'Naparami ang pinturang nailagay ni Sarah sa tsinelas kaya kumalat ito sa karton.'
+            },
+            // Materyales content
+            'Brand new': {
+                definition: 'Isang malaking karton na walang imprenta na ginagamit batay sa preperensya ng mga kustomer.',
+                usage: 'Para sa mga malalaking kumpanya mas mabili ang brand new na mga karton dahil mas maganda ang itsura nito.'
+            },
+            'Del Monte': {
+                definition: 'Isang karton na may imprenta ng Del Monte na ginagawang kahon ng Gin.',
+                usage: 'Karamihan sa ibinabagsak na karton ay may tatak na Del Monte.'
+            },
+            'Dila': {
+                definition: 'Bahagi ng tinabas na karton na nilalagyan ng pandikit upang ikabit sa likurang bahagi ng isa pang karton sa proseso ng pagbubuo ng kahon.',
+                usage: 'Maingat na ikinabit ni Joshua ang dilang may pandikit sa likod ng karton.'
+            },
+            'Double': {
+                definition: 'Karton na may dalawang kastro na mas matibay at makapal; kadalasang ginagamit para sa mga kahong paglalagyan ng mabibigat na produkto.',
+                usage: 'Para kay Sofia mas magandang gamitin ang dobol na karton para sa mabibigat na gamit na ilalagay rito.'
+            },
+            'Gawgaw': {
+                definition: 'Isang uri ng harina na inihahalo sa sosa para gawing pandikit sa karton.',
+                usage: 'Inihalo nila ang gawgaw sa isang litro ng tubig upang makagawa ng pandikit.'
+            },
+            'Karton': {
+                definition: 'Pangunahing materyales sa pagbuo ng isang kahon.',
+                usage: ' Kinokolekta muli nila ang mga karton upang makabuo ng isang kahon.'
+            },
+            'Kola': {
+                definition: 'Isang malapot na likido mula sa pinaghalong sosas, harina, at tubig na ginagamit bilang pandikit ng karton.',
+                usage: 'Ipinahid ni Clifford ang kola sa bahagi ng karton upang maidikit ang isa pang piraso ng karton.'
+            },
+            'Panapi': {
+                definition: 'Kapirasong karton na ikinakabit upang mapahaba pa ang ginagawang karton.',
+                usage: 'Naglagay si Caprice ng panapi dahil nabitin sa haba ang binubuong kahon.'
+            },
+            'Pandugtong': {
+                definition: 'Kapirasong karton na ikinakabit upang mapalapad pa ang ginagawang karton.',
+                usage: 'Dahil kinulang sa lapad ang binubuong kahon gumamit si Lella ng pandugtong upang mapalapad ang karton.'
+            },
+            'Pantapal': {
+                definition: 'Isang kapirasong karton bilang karagdagang inilalagay upang takpan ang may sirang bahagi o hindi pantay.',
+                usage: 'Agad na naghanap si Aling Marites ng pantapal nang makita ang maliit na sira ng karton.'
+            },
+            'Partisyon': {
+                definition: 'Isang produktong karton na inilalagay sa loob ng kahon para sa pagkakahati-hati.',
+                usage: 'Nilagyan ni Reich ng partisyon ang kahon upang hindi mabasag ang mga baso.'
+            },
+            'Segunda Mano o lokal': {
+                definition: 'Isang karton na may imprenta na ginagamit muli upang makabuo ng panibagong sukat.',
+                usage: 'Ginamit muli ni Rave ang lokal na karton para sa bagong sukat.'
+            },
+            'Scrap': {
+                definition: 'Tumutukoy sa mga bahagi ng karton na natabas na at hindi na magagamit.',
+                usage: 'Ginamit muli ni Rave ang lokal na karton para sa bagong sukat.'
+            },
+            'Single': {
+                definition: 'Karton na may isang kastro at mas manipis.',
+                usage: ' Mas magagaan naman na mga gamit ang gustong ilagay ni Sofia sa single na karton dahil mas manipis ito kaysa sa dobol.'
+            },
+            'Sosa': {
+                definition: 'Isang asido na kulay puti na inihahalo sa gawgaw bilang pandikit. Ito rin ay pantunaw o panluto ng gawgaw. ',
+                usage: 'Hinaluan ni Heath ng sosa ang gawgaw upang maging mas malagkit at matibay ang pandikit.'
+            },
+            'Tsinelas': {
+                definition: 'Isang parihaba na gawa sa rubber na ipinapanghagod sa imprenta.',
+                usage: 'Kinuha ni Gelo ang tsinelas at ginamit ito bilang panghagod ngunit wala ng ink.'
+            },
+            // Proseso content
+            'Deliver': {
+                definition: 'Pagdadala ng mga pahinante ng produktong kahon sa mga kustomer.',
+                usage: 'Dahil gabi na, bukas na ulit itutuloy ang pagde-deliver ng mga order ng kustomer sa iba\'t ibang kompanya.'
+            },
+            'Dudugtungan': {
+                definition: 'Pagkakabit ng panibagong karton sa gilid ng ginagawang karton upang mapalapad.',
+                usage: 'Dahil nabitin sa haba ang karton dudugtungan ito ni Emma para pumantay ito sa hinahanap na sukat.'
+            },
+            'Export': {
+                definition: 'Mga produktong hindi tinatapalan at ginagamitan ng brand new; mismong kustomer ang kumukuha ng karton.',
+                usage: 'Kinakailangan ng mga customer ang mismong karton lamang kaya naman ay nag-export sila para bumuo ng panibagong anyo gamit ang karton.'
+            },
+            'Hahagurin': {
+                definition: 'Paraan ng pagbibigay ng diin gamit ang panghagod sa mga gilid ng karton upang madaling matupi.',
+                usage: 'Hahagurin nang madiin ni Samantha ang karton upang madali itong matupi.'
+            },
+            'Import': {
+                definition: 'Pagdadala ng kustomer ng mga materyales na karton sa kartunan.',
+                usage: 'Kinulang na sa karton ang mga mananabas kaya naman nag-import na sila ng mga brandnew at lokal na karton upang makabuo na ulit ng order ng mga kustomer.'
+            },
+            'Pagbabaliktad': {
+                definition: 'Pagbabaliktad ng karton para maitago ang mukhang may imprenta at nakalabas ang walang imprenta.',
+                usage: 'Binaliktad ni ate Marie ang karton upang maitago ang mukhang  may imprentang bahagi.'
+            },
+            'Pag-iimprenta': {
+                definition: 'Mano-manong paglalagay ng imprenta o logo ng nga kumpanyang bumibili ng kahon.',
+                usage: 'Pinag-imprenta na ni Sally ang kaniyang asawa dahil tapos na ang mga nagawang kahon.'
+            },
+            'Pag-iislat': {
+                definition: 'Paghahati na magsisilbing pagitan sa mga bahaging pangsara ng kahon.',
+                usage: 'Patuloy sa pag-iislat si Jenny dahil maraming karton na naman ang paparating bukas.'
+            },
+            'Pagkakamada': {
+                definition: 'Paraan ng pagsasalansan ng mga nakataling karton.',
+                usage: 'Isa-isang ikinamada ni Kit ang mga karton upang mas madali itong mailipat sa isang pwesto.'
+            },
+            'Pagpapagulong': {
+                definition: 'Pagsasalang ng kartong natabas sa skoring upang matupi ng maayos ang mga gilid.',
+                usage: 'Para magkaroon ng magandang tupi ang karton ipinagulong ito ni Ariella sa skoring.'
+            },
+            'Pagpapakwenta': {
+                definition: 'Pagdadala ng kabuoang bilang ng nagawang karton ng mananabas sa may-ari para masahuran.',
+                usage: 'Ipinakwenta ni Pia ang kaniyang kabuuang nagawang kahon upang siya ay masahuran nang tama.'
+            },
+            'Pagpapaldo': {
+                definition: 'Isang nakatipon na scrap na nakataling magkabilang malalaking karton upang mapagsama-sama.',
+                usage: 'Pinaldo ni Gloria ang mga tira-tirang karton para mapagsama-sama ito sa iisang lagayan at makabuo pa ulit ng kahon gamit ito.'
+            },
+            'Pagtatabas': {
+                definition: 'Paraan ng paggupit ng karton upang mabago ang porma ang makabuo ng panibagong kahon.',
+                usage: 'Maingat na tinabas ni Margie ang bahagi ng karton na may sira para maging pulido ang pagbuo ng kahon.'
+            },
+            'Pagtatapal': {
+                definition: 'Pagtatakip ng bahagi ng karton na may sira. ginagamitan ito ng kapirasong karton bilang pantapal.',
+                usage: 'Sinimulan ni Kokoy ang pagtatapal sa sirang bahagi ng karton gamit ang kapirasong karton upang ibenta ito.'
+            },
+            'Pakyawan': {
+                definition: 'Uri ng paggawa ng mananabas na nakabatay sa dami ng kanilang kahon na mabubuo.',
+                usage: 'Nagtatrabaho lamang ng anim na oras kada araw si Mary Jean dahil pakyawan naman ang kanilang gawa.'
+            },
+            'Pick up': {
+                definition: 'Kustomer ang humahakot ng mga produktong kahon.',
+                usage: 'Nakabuo na ng limang daang pirasong kahon sina Karen at Nicole kaya hinihintay na lamang nila itong ma-pick up ng kustomer.'
+            },
+            'Reject': {
+                definition: 'Mga nabuong kahon na may maling sukat at binabalik ng mga kustomer.',
+                usage: 'Hindi nagustuhan ng kustomer ang sukat ng nabuong kahon kaya isinauli niya ito at minarkahan ng reject.'
+            },
+            'Repair': {
+                definition: 'Pagsasaayos muli ng mga reject na kahon.',
+                usage: 'Ang mga lokal na karton ay kinakailangan pa ng repair para magamit ulit ito at makabuo ng bagong kahon.'
+            },
+            'Rush': {
+                definition: 'Pagbuo ng kahon na kinakailangang mabuo agad dahil may itinakdang oras ang kustomer.',
+                usage: 'Nagkaroon ng rush sa pagbuo ng kahon dahil bukas na ito kinakailangan ni Catriona para sa kaniyang itinitindang mga baso.'
+            },
+            'Sinasapian': {
+                definition: 'Paraan ng pagkakabit sa kulang na bahagi ng karton upang mapahaba.',
+                usage: 'Sinasapian ni Rachelle ang kulang na bahagi ng karton na bitin upang maipantay ito sa ginagawang sukat.'
+            },
+            'Yayariin': {
+                definition: 'Pagtatabas, pagpapagulong, at pagbubuo ng karton.',
+                usage: 'Yayariin pa lamang ng mga mananabas ang bagong bagsak na mga karton.'
+            },
+
+            // Gampanin content
+            'Katiwala': {
+                definition: 'Taong humahawak ng buong proseso ng paggawa ng kartunan at nagbibigay ng sukat na gagawin ng mga mananabas.',
+                usage: 'Tanungin niyo na lamang po sa katiwala namin ang mga sukat ng karton.'
+            },
+            'Mananabas': {
+                definition: 'Mga taong nagtatabas at bumubuo ng kahon.',
+                usage: 'Tuwing umaga, ang mga mananabas ay nagsisimula sa pagtatabas ng karton bago ang iba pang proseso.'
+            },
+            'Taas o amo': {
+                definition: 'Katawagan sa taong nagkekwenta at nagpapasweldo sa mga mananabas ng karton.',
+                usage: 'Tatapusin ko nang buoin ang sukat ko para makapagkwenta na ako sa taas.'
+            },
+            'Tagaimprenta': {
+                definition: 'Mga taong naglalagay ng imprenta sa mga nagawang kahon tulad ng pako.',
+                usage: 'Kinuha si Raul bilang tagaimprenta ng karton sa kabilang bayan.'
+            },
+            'Tagapaldo': {
+                definition: 'Mga taong nagtitipon ng mga scrap para gawing paldo.',
+                usage: 'Tuwing hapon, makikitang nag-iikot ang tagapaldo na si Merlyn sa Kartunan upang kolektahin ang mga pira-pirasong karton.'
+            }
+        };
+
+        // Hamburger menu functionality
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMobileMenu() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        function closeMobileMenu() {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Mobile menu navigation functions
+        function showHomeMobile() {
+            showHome();
+            closeMobileMenu();
+        }
+
+        function showGlosaryoMobile() {
+            showGlosaryo();
+            closeMobileMenu();
+        }
+
+        function scrollToKasaysayanMobile() {
+            scrollToKasaysayan();
+            closeMobileMenu();
+        }
+
+        // Event listeners for mobile menu
+        hamburger.addEventListener('click', toggleMobileMenu);
+        overlay.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function () {
+            showHome();
+        });
+
+        function moveCarousel(direction) {
+            const wrapper = document.getElementById('carouselWrapper');
+            const cards = wrapper.querySelectorAll('.carousel-card');
+            const cardWidth = cards[0].offsetWidth + 20; // 20px is margin
+
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = 0;
+            if (currentIndex > cards.length - 1) currentIndex = cards.length - 1;
+
+            wrapper.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+        }
+
+        function scrollToCarousel() {
+            document.querySelector('.carousel-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToKasaysayan() {
+            // Show home section first if we're in another section
+            if (currentSection !== 'home') {
+                showHome();
+            }
+            // Wait a moment for the home section to load, then scroll
+            setTimeout(() => {
+                document.getElementById('kasaysayan').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        function updateNavActive(section) {
+            // Remove active class from all nav links
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Remove active class from mobile menu links
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Add active class based on current section
+            if (section === 'home' || section === 'kasaysayan') {
+                // Both Home and Kasaysayan are in the same section
+                document.querySelector('nav a[onclick="showHome()"]').classList.add('active');
+                document.querySelector('.mobile-menu a[onclick="showHomeMobile()"]').classList.add('active');
+            } else if (section === 'glosaryo') {
+                document.querySelector('nav a[onclick="showGlosaryo()"]').classList.add('active');
+                document.querySelector('.mobile-menu a[onclick="showGlosaryoMobile()"]').classList.add('active');
+            } else if (section === 'kagamitan') {
+                document.querySelector('nav a[onclick="showHome()"]').classList.add('active');
+                document.querySelector('.mobile-menu a[onclick="showHomeMobile()"]').classList.add('active');
+            } else if (section === 'materyales') {
+                document.querySelector('nav a[onclick="showHome()"]').classList.add('active');
+                document.querySelector('.mobile-menu a[onclick="showHomeMobile()"]').classList.add('active');
+            } else if (section === 'proseso') {
+                document.querySelector('nav a[onclick="showHome()"]').classList.add('active');
+                document.querySelector('.mobile-menu a[onclick="showHomeMobile()"]').classList.add('active');
+            } else if (section === 'gampanin') {
+                document.querySelector('nav a[onclick="showHome()"]').classList.add('active');
+                document.querySelector('.mobile-menu a[onclick="showHomeMobile()"]').classList.add('active');
+            } else if (section === 'detail') {
+                document.querySelector('nav a[onclick="showHome()"]').classList.add('active');
+                document.querySelector('.mobile-menu a[onclick="showHomeMobile()"]').classList.add('active');
+            }
+        }
+
+        function showHome() {
+            hideAllSections();
+            document.getElementById('home').style.display = 'block';
+            document.body.style.overflow = 'auto';
+            window.scrollTo(0, 0);
+            previousSection = currentSection;
+            currentSection = 'home';
+            updateNavActive('home');
+            closeMobileMenu();
+        }
+
+        function showGlosaryo() {
+            hideAllSections();
+            document.getElementById('home').style.display = 'block';
+            document.body.style.overflow = 'auto';
+            document.querySelector('.carousel-section').scrollIntoView({ behavior: 'smooth' });
+            previousSection = currentSection;
+            currentSection = 'glosaryo';
+            updateNavActive('glosaryo');
+            closeMobileMenu();
+        }
+
+        function showKagamitan() {
+            hideAllSections();
+            document.getElementById('kagamitan').style.display = 'flex';
+            document.body.style.overflow = 'auto';
+            window.scrollTo(0, 0);
+            previousSection = currentSection;
+            currentSection = 'kagamitan';
+            updateNavActive('kagamitan');
+            closeMobileMenu();
+        }
+
+        function showMateryales() {
+            hideAllSections();
+            document.getElementById('materyales').style.display = 'flex';
+            document.body.style.overflow = 'auto';
+            window.scrollTo(0, 0);
+            previousSection = currentSection;
+            currentSection = 'materyales';
+            updateNavActive('materyales');
+            closeMobileMenu();
+        }
+
+        function showProseso() {
+            hideAllSections();
+            document.getElementById('proseso').style.display = 'flex';
+            document.body.style.overflow = 'auto';
+            window.scrollTo(0, 0);
+            previousSection = currentSection;
+            currentSection = 'proseso';
+            updateNavActive('proseso');
+            closeMobileMenu();
+        }
+
+        function showGampanin() {
+            hideAllSections();
+            document.getElementById('gampanin').style.display = 'flex';
+            document.body.style.overflow = 'auto';
+            window.scrollTo(0, 0);
+            previousSection = currentSection;
+            currentSection = 'gampanin';
+            updateNavActive('gampanin');
+            closeMobileMenu();
+        }
+
+        function showDetail(term, section) {
+            currentDetailTerm = term; // Store the current term
+            hideAllSections();
+            document.getElementById('detailTitle').textContent = term;
+            document.getElementById('detailTerm').textContent = term;
+
+            // Set content based on the term
+            let definition = '';
+            let usage = '';
+
+            if (contentMap[term]) {
+                definition = contentMap[term].definition;
+                usage = contentMap[term].usage;
+            } else {
+                definition = 'Detalye tungkol sa ' + term + '.';
+                usage = 'Halimbawa ng paggamit ng ' + term + ' sa pangungusap.';
+            }
+
+            document.getElementById('detailDefinition').textContent = definition;
+            document.getElementById('detailUsage').textContent = usage;
+
+            // Reset all audio icons
+            resetAllAudioIcons();
+
+            // Set video or image based on section and term
+            const videoElement = document.getElementById('detailVideo');
+            const imageElement = document.getElementById('detailImage');
+            const videoPlaceholder = document.getElementById('videoPlaceholder');
+
+            // Hide all media elements first
+            videoElement.style.display = 'none';
+            imageElement.style.display = 'none';
+            videoPlaceholder.style.display = 'none';
+
+            // Show appropriate media based on section
+            if (section === 'proseso' && videoMap[term]) {
+                // Show video for Proseso section
+                videoElement.src = videoMap[term];
+                videoElement.style.display = 'block';
+            } else if (imageMap[term]) {
+                // Show image for other sections
+                imageElement.src = imageMap[term];
+                imageElement.style.display = 'block';
+            } else {
+                // Show placeholder if no media is available
+                videoPlaceholder.style.display = 'flex';
+            }
+
+            document.getElementById('detail').style.display = 'flex';
+            document.body.style.overflow = 'auto';
+            window.scrollTo(0, 0);
+            previousSection = currentSection;
+            currentSection = 'detail';
+            updateNavActive('detail');
+            closeMobileMenu();
+        }
+
+        function toggleAudio(type) {
+            let audioFile = '';
+            let audioIcon = null;
+
+            switch (type) {
+                case 'definition':
+                    audioFile = definitionAudioMap[currentDetailTerm];
+                    audioIcon = document.getElementById('definitionAudioIcon');
+                    break;
+                case 'usage':
+                    audioFile = usageAudioMap[currentDetailTerm];
+                    audioIcon = document.getElementById('usageAudioIcon');
+                    break;
+            }
+
+            if (!audioFile) {
+                alert('Audio not available for ' + type + ' of: ' + currentDetailTerm);
+                return;
+            }
+
+            // Stop any currently playing audio
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                // Remove playing class from all audio icons
+                document.querySelectorAll('.audio-icon').forEach(icon => {
+                    icon.classList.remove('playing');
+                });
+            }
+
+            // If we're already playing this audio, just stop it
+            if (currentAudio && currentAudio.src.includes(audioFile)) {
+                currentAudio = null;
+                return;
+            }
+
+            // Create the audio
+            currentAudio = new Audio(audioFile);
+
+            // Set the current time to 1 second (1000 milliseconds) for usage audio
+            if (type === 'usage') {
+                currentAudio.currentTime = 1.0; // Start at 1 second
+            }
+
+            currentAudio.play();
+
+            if (audioIcon) {
+                audioIcon.classList.add('playing');
+            }
+
+            // Reset when audio ends
+            currentAudio.onended = function () {
+                if (audioIcon) {
+                    audioIcon.classList.remove('playing');
+                }
+                currentAudio = null;
+            };
+
+            // Handle errors
+            currentAudio.onerror = function () {
+                if (audioIcon) {
+                    audioIcon.classList.remove('playing');
+                }
+                alert('Audio file not found for: ' + currentDetailTerm);
+                currentAudio = null;
+            };
+        }
+        // Add helper function to reset all audio icons
+        function resetAllAudioIcons() {
+            document.querySelectorAll('.audio-icon').forEach(icon => {
+                icon.classList.remove('playing');
+            });
+        }
+
+        function goBackToPreviousSection() {
+            // Stop any playing audio when going back
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                currentAudio = null;
+            }
+
+            // Reset all audio icons
+            resetAllAudioIcons();
+
+            if (previousSection === 'kagamitan') {
+                showKagamitan();
+            } else if (previousSection === 'materyales') {
+                showMateryales();
+            } else if (previousSection === 'proseso') {
+                showProseso();
+            } else if (previousSection === 'gampanin') {
+                showGampanin();
+            } else {
+                showHome();
+            }
+        }
+
+        function hideAllSections() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+    <script>
+        window.addEventListener('scroll', function () {
+            const nav = document.querySelector('nav');
+
+            if (window.scrollY > 20) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
