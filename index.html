@@ -2400,7 +2400,7 @@
 
     <!-- Background Sound -->
     <audio id="bgMusic" loop>
-        <source src="./audio/bgm1.mp3" type="audio/mpeg">
+        <source src="./audio/bgm.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Sound Control Widget -->
@@ -2702,8 +2702,8 @@
                 onclick="showDetail('Pantápal', 'materyales')"><span>Pantápal</span></button>
             <button class="kagamitan-button"
                 onclick="showDetail('Partisyón', 'materyales')"><span>Partisyón</span></button>
-            <button class="kagamitan-button" onclick="showDetail('Segunda Mano o lokál', 'materyales')"><span>Segunda
-                    Mano o lokál</span></button>
+            <button class="kagamitan-button" onclick="showDetail('lokál', 'materyales')"><span>
+                     lokál</span></button>
             <button class="kagamitan-button" onclick="showDetail('Skráp', 'materyales')"><span>Skráp</span></button>
             <button class="kagamitan-button" onclick="showDetail('Síngle', 'materyales')"><span>Síngle</span></button>
             <button class="kagamitan-button" onclick="showDetail('Sosà', 'materyales')"><span>Sosà</span></button>
@@ -3034,7 +3034,7 @@
             'Pandugtóng': './images/Pandugtong.jpg',
             'Pantápal': './images/Pantapal.jpg',
             'Partisyón': './images/Partisyon.jpg',
-            'Segunda Mano o lokál': './images/Segunda mano o lokal.jpg',
+            'lokál': './images/Segunda mano o lokal.jpg',
             'Skráp': './images/Scrap.jpg',
             'Síngle': './images/single.jpg',
             'Sosà': './images/Sosa.jpg',
@@ -3067,7 +3067,7 @@
             'Pandugtóng': './audio/materyales-k/8. pandugtong kagukugan materyales.m4a',
             'Pantápal': './audio/materyales-k/9 pantapal kahulugan materyales.m4a',
             'Partisyón': './audio/materyales-k/10 partisyon materyales kahulugan.m4a',
-            'Segunda Mano o lokál': './audio/materyales-k/11 segunda mano o lokal kahukugan materyales.m4a',
+            'lokál': './audio/materyales-k/11 segunda mano o lokal kahukugan materyales.m4a',
             'Skráp': './audio/materyales-k/12 scrap kahukugan materyales.m4a',
             'Síngle': './audio/materyales-k/13 single kahulugan mareryales.m4a',
             'Sosà': './audio/materyales-k/14 sosa kahukugan materyales.m4a',
@@ -3121,7 +3121,7 @@
             'Pandugtóng': './audio/materyales-p/8. Pandugtong.m4a',
             'Pantápal': './audio/materyales-p/9. Pantapal.m4a',
             'Partisyón': './audio/materyales-p/10. Partisyon.m4a',
-            'Segunda Mano o lokál': './audio/materyales-p/11. Segunda mano.m4a',
+            'lokál': './audio/materyales-p/11. Segunda mano.m4a',
             'Skráp': './audio/materyales-p/12. Scrap.m4a',
             'Síngle': './audio/materyales-p/13. single.m4a',
             'Sosà': './audio/materyales-p/14. sosa.m4a',
@@ -3175,7 +3175,7 @@
             'Pandugtóng': { definition: 'Kapirasong karton na ikinakabit upang mapalapad pa ang ginagawang karton.', usage: 'Dahil kinulang sa lapad ang binubuong kahon, gumamit si Lella ng pandugtóng upang mapalapad ang karton.' },
             'Pantápal': { definition: 'Isang kapirasong karton na inilalagay bilang karagdagang patakip ng may sirang bahagi o hindi pantay.', usage: 'Agad na naghanap si Aling Marites ng pantápal nang makita ang maliit na sira ng karton.' },
             'Partisyón': { definition: 'Isang produktong karton na inilalagay sa loob ng kahon para sa pagkakahati-hati.', usage: 'Nilagyan ni Reich ng partisyón ang kahon upang hindi mabasag ang mga baso.' },
-            'Segunda Mano o lokál': { definition: 'Isang karton na may imprenta na ginagamit muli upang makabuo ng panibagong sukat.', usage: 'Ginamit muli ni Rave ang lokál na karton para sa bagong sukat.' },
+            'lokál': { definition: 'Isang karton na may imprenta na ginagamit muli upang makabuo ng panibagong sukat.', usage: 'Ginamit muli ni Rave ang lokál na karton para sa bagong sukat.' },
             'Skráp': { definition: 'Tumutukoy sa mga bahagi ng karton na natabas na at hindi na magagamit. Ginagamit ang mga ito para gawing paldo.', usage: 'Tinipon ni Andrew ang mga skráp para gawing paldo.' },
             'Síngle': { definition: 'Karton na may isang kastro at mas manipis.', usage: 'Mas magagaan naman na ang mga gamit na gustong ilagay ni Sofia sa síngle na karton dahil mas manipis ito kaysa sa dobleng karton.' },
             'Sosà': { definition: 'Isang asidong kulay puti na inihahalo sa gawgáw bilang pandikit. Ito rin ay pantunaw o panluto ng gawgáw.', usage: 'Hinaluan ni Heath ng sosà ang gawgáw upang maging mas malagkit at matibay ang pandikit.' },
@@ -3565,7 +3565,7 @@
 
         const termCategoryMap = {
             kagamitan: ['Iskóring o pagulungán', 'Islátán', 'Katér', 'Malakíng mukhâ', 'Maliít na mukhâ', 'Mukhâ', 'Panghágod', 'Pang-imprénta', 'Pintúra'],
-            materyales: ['Brand néw', 'Del mónte', 'Dilà', 'Dóbol', 'Gawgáw', 'Kartón', 'Kóla', 'Panapì', 'Pandugtóng', 'Pantápal', 'Partisyón', 'Segunda Mano o lokál', 'Skráp', 'Síngle', 'Sosà', 'Tsinélas'],
+            materyales: ['Brand néw', 'Del mónte', 'Dilà', 'Dóbol', 'Gawgáw', 'Kartón', 'Kóla', 'Panapì', 'Pandugtóng', 'Pantápal', 'Partisyón', 'lokál', 'Skráp', 'Síngle', 'Sosà', 'Tsinélas'],
             proseso: ['Delivér', 'Dudugtúngan', 'Ekspórt', 'Hahagúrin', 'Impórt', 'Pagbabaliktád', 'Pag-iimprénta', 'Pag-i-islát', 'Pagkakamáda', 'Pagpapagúlong', 'Pagpapakwentá', 'Pagpapaldó', 'Pagtatábas', 'Pagtatápal', 'Pakyáwan', 'Pick up', 'Rejêct', 'Repaír', 'Rush', 'Sinasapían', 'Yayariín'],
             gampanin: ['Katiwalà', 'Mananábas', 'Taás', 'Taga-imprénta', 'Tagapaldó']
         };
